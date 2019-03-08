@@ -24,6 +24,7 @@
                 <th>Model</th>
                 <th>Year</th>
                 <th>Mileage</th>
+                <th>Picture</th>
                 <th>Category</th>
                 <td>Actions</td>
             </tr>
@@ -35,6 +36,10 @@
                 <td th:text="${car.model}"></td>
                 <td th:text="${car.year}"></td>
                 <td th:text="${car.mileage}"></td>
+                <!--add car photo-->
+                <td th:if="${car.carpic} != null">
+                    <img th:src="${car.carpic}" />
+                </td>
                 <td th:text="${car.category.categoryName}"></td>    <!-- this omission took me an hour to find. car.category.CATEGORYNAME -->
                 <td>
                     <a th:href="@{/updatecar/{id}(id=${car.id})}"> Update </a> -

@@ -22,6 +22,7 @@
         Model : <span th:text="${car.model}"></span><br />
         Year : <span th:text="${car.year}"></span><br />
         Mileage : <span th:text="${car.mileage}"></span><br />
+        Picture : <span th:src="${car.carpic}"></span>
         Category : <span th:text="${car.category.categoryName}"></span><br />
         <a th:href="@{/deletecar/{id}(id=${car.id})}"> Delete this car</a>
     </section>

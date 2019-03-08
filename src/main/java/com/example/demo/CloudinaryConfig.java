@@ -11,14 +11,14 @@ import java.io.IOException;
 import java.util.Map;
 
 @Component
-public class CoudinaryConfig {
+public class CloudinaryConfig {
 
     private Cloudinary cloudinary;
 
     @Autowired
-    public CoudinaryConfig(@Value("${cloud.key}") String key,
-                           @Value("${cloud.secret}") String secret,
-                           @Value("${cloud.name}") String cloud) {
+    public CloudinaryConfig(@Value("${cloud.key}") String key,
+                            @Value("${cloud.secret}") String secret,
+                            @Value("${cloud.name}") String cloud){
         cloudinary = Singleton.getCloudinary();
         cloudinary.config.cloudName=cloud;
         cloudinary.config.apiSecret=secret;
@@ -37,8 +37,8 @@ public class CoudinaryConfig {
     public String createUrl(String name, int width, int height, String action){
         return cloudinary.url()
                 .transformation(new Transformation()
-                .width(width).height(height)
-                .border("2px_solid_black").crop(action))
+                        .width(width).height(height)
+                        .border("2px_solid_black").crop(action))
                 .imageTag(name);
     }
 }

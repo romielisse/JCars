@@ -1,16 +1,18 @@
 package com.example.demo;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -21,9 +23,7 @@ public class HomeController {
     CategoryRepository categoryRepository;
 
     @Autowired
-    Clou
-
-
+    CloudinaryConfig cloudc;
 
     /* first, create paths for car as usual */
     @RequestMapping("/")
@@ -40,6 +40,23 @@ public class HomeController {
         /* new addition for Category object */
         model.addAttribute("categories", categoryRepository.findAll());
         return "carform";
+    }
+
+    /* add method for car picture */
+    @PostMapping("/add")
+    public String processActor(@ModelAttribute Car car, @RequestParam("file") MultipartFile file){
+        if (file.isEmpty()){
+            return "redirect:/add";
+        }
+        try {
+            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcestype", "auto"));
+            car.setCarpic(uploadResult.get("url").toString());
+            carRepository.save(car);
+        } catch (IOException e){
+            e.printStackTrace();
+            return "redirect:/add";
+        }
+        return "redirect:/";
     }
 
     @PostMapping("/process")
@@ -102,6 +119,8 @@ public class HomeController {
         carRepository.deleteById(id);
         return "redirect:/";
     }
+
+
 
     /* and a version for category class */
     @RequestMapping("/detailcategory/{id}")
