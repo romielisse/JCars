@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Car {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

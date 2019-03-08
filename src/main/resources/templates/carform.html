@@ -28,9 +28,9 @@
                 <h3>Please submit a form below.</h3>
                 <form action="#" th:action="@{/process}" th:object="${car}" method="post">
                     <!-- hidden field -->
-                    <div class="form-group">
+                    <!--<div class="form-group">-->
                         <input type="hidden" th:field="*{id}" />
-                    </div>
+                    <!--</div>-->
                     <!-- When doing forms, be sure to have th:field, th:if, th:errors tags-->
                     <div class="form-group">
                         <!--<label for="title">Title</label>-->
@@ -74,30 +74,24 @@
                     </div>
                     <!-- If not in stock, set numBooks to zero -->
                     <div class="form-group">
-                        <!--<label for="numberOfBooks">Number of Books</label>-->
-                        <!--<input type="text" class="form-control" id="numberOfBooks" th:field="*{numberOfBooks}">-->
-                        <!--<span th:if="${#fields.hasErrors('numberOfBooks')}" th:errors="*{numberOfBooks}"></span>-->
-                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label>
-                        <!--<label for="category">Category</label>-->
-                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <!-- Not sure how to incorporate the two lines below-->
-                        <input type="button" th:field="*{category}" />
-                        <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span><br />
-                        <!--<select class="form-control form-control-sm">-->
-                            <!--<option>Small select</option>-->
+                        <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label>-->
+                        <!--<select th:field="*{category}" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">-->
+                            <!--<option selected>Choose...</option>-->
+                            <!--<option value="1">One</option>-->
+                            <!--<option value="2">Two</option>-->
+                            <!--<option value="3">Three</option>-->
                         <!--</select>-->
+                        Category :<select th:field="*{category}" class="form-control input-md">
+                        <option th:each="option : ${categories}"
+                                th:value="${option.id}">[[${option.name}]]</option>
+                        </select><br />
+                        <!--<option th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></option><br />-->
                     </div>
                     <!-- submit button -->
+                    <button type="submit" class="btn btn-primary my-1">Submit</button>
                     <!--<div class="form-group">-->
                         <!--<input type="submit" id="submit" value="Submit" class="btn-default">-->
                     <!--</div>-->
-                    <button type="submit" class="btn btn-primary my-1">Submit</button>
-
                 </form>
             </div>
         </div>

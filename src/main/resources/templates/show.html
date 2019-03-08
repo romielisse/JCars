@@ -19,19 +19,18 @@
     </header>
     <div class="container">
         <p>
-        <h3>Showing details of the book you've selected:</h3>
+        <h3>Showing details of the car you've selected:</h3>
         </p>
     </div>
-
+    <section class="container">
         Type : <span th:text="${car.type}"></span><br />
         Make : <span th:text="${car.make}"></span><br />
         Model : <span th:text="${car.model}"></span><br />
         Year : <span th:text="${car.year}"></span><br />
         Mileage : <span th:text="${car.mileage}"></span><br />
         Category : <span th:text="${car.category}"></span><br />
-
-    <a th:href="@{/delete/{id}(id=${car.id})}"> Delete this car</a>
-
+        <a th:href="@{/delete/{id}(id=${car.id})}"> Delete this car</a>
+    </section>
 
     <!--JSS Script-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

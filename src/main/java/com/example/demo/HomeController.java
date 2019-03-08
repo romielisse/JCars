@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
@@ -18,14 +19,26 @@ public class HomeController {
     @Autowired
     CategoryRepository categoryRepository;
 
+    /* first, create paths for car as usual */
     @RequestMapping("/")
     public String listCars(Model model){
         model.addAttribute("cars", carRepository.findAll());
+        /* new addition for Category object */
+        model.addAttribute("categoies", categoryRepository.findAll());
         return "list";
     }
 
     @GetMapping("/add")
-    public String processForm(@Valid Car car, BindingResult result){
+    public String carForm(Model model){
+        model.addAttribute("car", new Car());
+        /* new addition for Category object */
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "carform";
+    }
+
+    @PostMapping("/process")
+    public String processForm(@Valid Car car, BindingResult result,
+                              Model model){
         if (result.hasErrors()){
             return "carform";
         }
@@ -33,6 +46,23 @@ public class HomeController {
         return "redirect:/";
     }
 
+    /* then, add the paths for category. this is new :^) */
+
+    /* new addition for Category object */
+    @GetMapping("/addcategory")
+    public String categoryForm(Model model){
+        model.addAttribute("category", new Category());
+        return "category";
+    }
+
+    /* new addition for Category object */
+    @PostMapping
+
+
+
+
+
+    /* the detail, update, delete links */
     @RequestMapping("/detail/{id}")
     public String showCar(@PathVariable("id") long id, Model model){
         model.addAttribute("car", carRepository.findById(id).get());
