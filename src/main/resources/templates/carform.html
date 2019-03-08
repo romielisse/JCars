@@ -12,10 +12,11 @@
     <!-- Header and Navigation bar-->
     <header class="container center">
         <div class="row">
-            <h1 class="col-sm-6">Cars Listing</h1>
-            <nav class="col-sm-6">
-                <a class="col-sm-3 text-left" href="/">All Cars</a>
-                <a class="col-sm-3 text-left" href="/add">Add a Car</a>
+            <h1 class="col-sm-4">Cars Listing</h1>
+            <nav class="col-sm-8">
+                <a class="col-sm-2 text-left" href="/">All Cars</a>
+                <a class="col-sm-2 text-left" href="/add">Add Car</a>
+                <a class="col-sm-2 text-left" href="/addcategory">Add Category</a>
             </nav>
             <p></p>
         </div>
@@ -26,54 +27,46 @@
         <div class="row">
             <div class="col-sm-12">
                 <h3>Please submit a form below.</h3>
-                <form action="#" th:action="@{/process}" th:object="${car}" method="post">
+                <!-- When doing forms, be sure to have th:field, th:if, th:errors tags-->
+                <form action="#"
+                      th:action="@{/process}"
+                      th:object="${car}"
+                      method="post">
                     <!-- hidden field -->
-                    <!--<div class="form-group">-->
                         <input type="hidden" th:field="*{id}" />
-                    <!--</div>-->
-                    <!-- When doing forms, be sure to have th:field, th:if, th:errors tags-->
                     <div class="form-group">
-                        <!--<label for="title">Title</label>-->
-                        <!--<input type="text" class="form-control" id="title" th:field="*{title}">-->
-                        <!--<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>-->
                         <label for="type">Type</label>
                         <input type="text" class="form-control" id="type" th:field="*{type}" />
                         <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span><br />
                     </div>
                     <div class="form-group">
-                        <!--<label for="author">Author</label>-->
-                        <!--<input type="text" class="form-control" id="author" th:field="*{author}">-->
-                        <!--<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>-->
                         <label for="make">Make</label>
                         <input type="text" class="form-control" id="make" th:field="*{make}" />
                         <span th:if="${#fields.hasErrors('make')}" th:errors="*{make}"></span><br />
                     </div>
                     <div class="form-group">
-                        <!--<label for="description">Description</label>-->
-                        <!--<input type="text" class="form-control" id="description" th:field="*{description}">-->
-                        <!--<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>-->
                         <label for="model">Model</label>
                         <input type="text" class="form-control" id="model" th:field="*{model}" />
                         <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></span><br />
                     </div>
                     <div class="form-group">
-                        <!--<label for="price">Price</label>-->
-                        <!--<input type="text" class="form-control" id="price" th:field="*{price}">-->
-                        <!--<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>-->
                         <label for="year">Year</label>
-                        Year :<input type="text" class="form-control" id="year" th:field="*{year}" />
+                        <input type="text" class="form-control" id="year" th:field="*{year}" />
                         <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span><br />
                     </div>
                     <div class="form-group text-left">
-                        <!--<label for="isInStock">In Stock</label>-->
-                        <!--<input type="checkbox" class="form-control" id="isInStock" th:field="*{isInStock}">-->
-                        <!--<span th:if="${#fields.hasErrors('isInStock')}" th:errors="*{isInStock}"></span>-->
                         <label for="mileage">Mileage</label>
                         <input type="text" class="form-control" id="mileage" th:field="*{mileage}" />
                         <span th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"></span><br />
                     </div>
                     <!-- If not in stock, set numBooks to zero -->
                     <div class="form-group">
+                        Category
+                        <select th:field="*{category}" class="form-control input-md">
+                            <option selected>Choose</option>
+                            <option th:each="option : ${categories}"
+                                    th:value="${option.id}">[[${option.name}]]</option>
+                        </select><br />
                         <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label>-->
                         <!--<select th:field="*{category}" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">-->
                             <!--<option selected>Choose...</option>-->
@@ -81,17 +74,9 @@
                             <!--<option value="2">Two</option>-->
                             <!--<option value="3">Three</option>-->
                         <!--</select>-->
-                        Category :<select th:field="*{category}" class="form-control input-md">
-                        <option th:each="option : ${categories}"
-                                th:value="${option.id}">[[${option.name}]]</option>
-                        </select><br />
-                        <!--<option th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></option><br />-->
                     </div>
                     <!-- submit button -->
                     <button type="submit" class="btn btn-primary my-1">Submit</button>
-                    <!--<div class="form-group">-->
-                        <!--<input type="submit" id="submit" value="Submit" class="btn-default">-->
-                    <!--</div>-->
                 </form>
             </div>
         </div>
