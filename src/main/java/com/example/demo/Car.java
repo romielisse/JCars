@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,9 +27,13 @@ public class Car {
     @Size(min = 4)
     private int year;
 
+    @NotNull
+    @Min(1)
+    private int mileage;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
-    public Category category;
+    private Category category;
 
     public Car(){
 
@@ -72,6 +77,14 @@ public class Car {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public int getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
     }
 
     public Category getCategory() {

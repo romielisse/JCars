@@ -16,7 +16,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Set<Car> cars;
+    public Set<Car> cars;   // Set must be public
 
     public Category(){
 

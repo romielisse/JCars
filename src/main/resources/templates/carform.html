@@ -5,8 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#" th:action="/process" th:object="car" method="post">
+<form action="#" th:action="@{/process}" th:object="${car}" method="post">
     <input type="hidden" th:field="*{id}" />
+    Type :<input type="text" th:field="*{type}" />
+    <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span><br />
+    Make :<input type="text" th:field="*{make}" />
+    <span th:if="${#fields.hasErrors('make')}" th:errors="*{make}"></span><br />
+    Model :<input type="text" th:field="*{model}" />
+    <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></span><br />
+    Year :<input type="text" th:field="*{year}" />
+    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span><br />
+    Mileage :<input type="text" th:field="*{mileage}" />
+    <span th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"></span><br />
+    Category :<input type="button" th:field="*{category}" />
+    <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span><br />
+    <input type="submit" value="Submit" class="btn-default" />    <!-- check with Bootstrap to make this button work -->
 
 </form>
 
