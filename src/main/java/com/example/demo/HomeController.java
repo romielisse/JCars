@@ -56,13 +56,22 @@ public class HomeController {
     }
 
     /* new addition for Category object */
-    @PostMapping
+    @PostMapping("/processcategory")
+    public String processCategory(@Valid Category category, BindingResult result,
+                                  Model model){
+        if (result.hasErrors()){
+            return "category";
+        }
+        if (categoryRepository.findByName(category.getName()) != null){
+            model.addAttribute("message", "You already have a category called " +
+                    category.getName() + "!" + "Try something else.");
+            return "category";
+        }
+        categoryRepository.save(category);
+        return "redirect:/";
+    }
 
-
-
-
-
-    /* the detail, update, delete links */
+    /* lastly, the detail or update or delete paths as usual */
     @RequestMapping("/detail/{id}")
     public String showCar(@PathVariable("id") long id, Model model){
         model.addAttribute("car", carRepository.findById(id).get());
