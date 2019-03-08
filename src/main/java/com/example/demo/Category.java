@@ -14,7 +14,7 @@ public class Category {
 
     @NotNull
     @Size(min = 3)
-    private String name;
+    private String categoryName;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Car> cars;   // Set must be public
@@ -31,12 +31,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Set<Car> getCars() {

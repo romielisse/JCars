@@ -1,3 +1,4 @@
+<!-- url is "/addcategory" -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,32 +9,22 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 </head>
 <body>
-    <!-- Header and Navigation bar-->
-    <header class="container center">
-        <div class="row">
-            <h1 class="col-sm-4">Cars Listing</h1>
-            <nav class="col-sm-8">
-                <a class="col-sm-2 text-left" href="/">All Cars</a>
-                <a class="col-sm-2 text-left" href="/add">Add Car</a>
-                <a class="col-sm-2 text-left" href="/addcategory">Add Category</a>
-            </nav>
-            <p></p>
-        </div>
-    </header>
+    <div th:insert="~{base :: copy}"></div>
 
     <section class="container">
-        <h3>Please add a name for the category you'd like to add.</h3>
+        <h4>Please add a category</h4>
         <form action="#"
               th:action="@{/processcategory}"
               th:object="${category}"
               method="post">
+
             <input type="hidden" th:field="*{id}" />
             <div class="form-group">
-                <label for="name">Name of Car Category</label>
-                <input type="text" th:field="*{name}" />
-                <span th:if="${#fields.hasErrors('name')}"
-                      th:errors="*{name}"></span>
-                <small id="name" class="form-text text-muted">Please be sure to add a category that is not already listed.</small>
+
+                <input type="text" th:field="*{categoryName}" />
+                <span th:if="${#fields.hasErrors('categoryName')}"
+                      th:errors="*{categoryName}"></span>
+                <small id="categoryName" class="form-text text-muted">Please be sure to add a category that is not already listed.</small>
             </div>
             <div class="form-group">
                 <span th:text="${message}"></span><br />

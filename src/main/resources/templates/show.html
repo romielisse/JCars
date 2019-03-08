@@ -1,3 +1,4 @@
+<!-- url is "/detail/{id}" -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,18 +9,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 </head>
 <body>
-    <!-- Header and Navigation bar-->
-    <header class="container center">
-        <div class="row">
-            <h1 class="col-sm-4">Cars Listing</h1>
-            <nav class="col-sm-8">
-                <a class="col-sm-2 text-left" href="/">All Cars</a>
-                <a class="col-sm-2 text-left" href="/add">Add Car</a>
-                <a class="col-sm-2 text-left" href="/addcategory">Add Category</a>
-            </nav>
-            <p></p>
-        </div>
-    </header>
+    <div th:insert="~{base :: copy}"></div>
 
     <div class="container">
         <p>
@@ -32,8 +22,8 @@
         Model : <span th:text="${car.model}"></span><br />
         Year : <span th:text="${car.year}"></span><br />
         Mileage : <span th:text="${car.mileage}"></span><br />
-        Category : <span th:text="${car.category}"></span><br />
-        <a th:href="@{/delete/{id}(id=${car.id})}"> Delete this car</a>
+        Category : <span th:text="${car.category.categoryName}"></span><br />
+        <a th:href="@{/deletecar/{id}(id=${car.id})}"> Delete this car</a>
     </section>
 
     <!--JSS Script-->

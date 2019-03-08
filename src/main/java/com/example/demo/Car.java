@@ -32,6 +32,8 @@ public class Car {
     @Min(1)
     private int mileage;
 
+    private String carpic;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
@@ -86,6 +88,14 @@ public class Car {
 
     public void setMileage(int mileage) {
         this.mileage = mileage;
+    }
+
+    public String getCarpic() {
+        return carpic;
+    }
+
+    public void setCarpic(String carpic) {
+        this.carpic = carpic;
     }
 
     public Category getCategory() {

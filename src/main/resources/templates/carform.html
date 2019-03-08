@@ -9,18 +9,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 </head>
 <body>
-    <!-- Header and Navigation bar-->
-    <header class="container center">
-        <div class="row">
-            <h1 class="col-sm-4">Cars Listing</h1>
-            <nav class="col-sm-8">
-                <a class="col-sm-2 text-left" href="/">All Cars</a>
-                <a class="col-sm-2 text-left" href="/add">Add Car</a>
-                <a class="col-sm-2 text-left" href="/addcategory">Add Category</a>
-            </nav>
-            <p></p>
-        </div>
-    </header>
+    <div th:insert="~{base :: copy}"></div>
 
     <!-- form format -->
     <div class="container">
@@ -64,26 +53,26 @@
                         <span th:if="${#fields.hasErrors('mileage')}"
                               th:errors="*{mileage}"></span><br />
                     </div>
-                    <!-- If not in stock, set numBooks to zero -->
                     <div class="form-group">
                         Category
-                        <select th:field="*{category}" class="form-control input-md">
-                            <!--<option th:selected>Select Category</option>-->
-                            <option th:each="option : ${categories}" th:value="${option.id}" th:selected="${option}">
-                                [[${option.name}]]
-                            </option>
-                            <option value="0" selected="selected">Choose Category</option>
+                        <select name="category" id="category" class="form-control input-md">
+                            <option th:selected>Select Category</option>
+                            <option th:each="option : ${categories}"
+                                    th:value="${option.id}"
+                                    th:text="${option.categoryName}"></option>
+
+                            <!-- th:value attributes in the nested <option> tags will be very important because
+                            they will provide the means of knowing which is the currently selected option-->
                         </select><br />
-                        <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label>-->
-                        <!--<select th:field="*{category}" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">-->
-                            <!--<option selected>Choose...</option>-->
-                            <!--<option value="1">One</option>-->
-                            <!--<option value="2">Two</option>-->
-                            <!--<option value="3">Three</option>-->
-                        <!--</select>-->
                     </div>
                     <!-- submit button -->
-                    <button type="submit" class="btn btn-primary my-1">Submit</button>
+                    <button type="submit" class="btn btn-primary my-1">Save</button>
+                </form>
+                <form method="POST" action="/add" th:object="${car}" enctype="multipart/form-data">
+                    Name: <input type="text" th:field="*{name}">
+                    Real Name: <input type="text" th:field="*{realname}">
+                    <input type="file" name="file"><br><br>
+                    <input type="submit" value="Submit">
                 </form>
             </div>
         </div>

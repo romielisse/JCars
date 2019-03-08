@@ -1,31 +1,29 @@
-<!-- Will be using base.html to unify the look of header and jumbotron-->
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+    <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 </head>
 <body>
-    <!-- Header and Navigation bar-->
-    <div th:fragment="copy">
-        <header class="container center">
-            <div class="row">
-                <h1 class="col-sm-4">Cars Listing</h1>
-                <nav class="col-sm-8">
-                    <a class="col-sm-2 text-left" href="/">All Cars</a>
-                    <a class="col-sm-2 text-left" href="/add">Add Car</a>
-                    <a class="col-sm-2 text-left" href="/category">All Categories</a>
-                    <a class="col-sm-2 text-left" href="/addcategory">Add Category</a>
-                </nav>
-                <p></p>
-            </div>
-        </header>
+    <div th:insert="~{base :: copy}"></div>
+
+    <div class="container">
+        <p>
+        <h3>Showing details of the category you've selected:</h3>
+        </p>
     </div>
+    <section class="container">
+        Category : <span th:text="${category.categoryName}"></span><br />
 
 
+        <p></p>
+        <a th:href="@{/deletecategory/{id}(id=${category.id})}"> Delete this category</a>
+    </section>
+
+<!--JSS Script-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
