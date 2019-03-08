@@ -24,7 +24,7 @@ public class Car {
     private String model;
 
     @NotNull
-    @Size(min = 4)
+    @Min(4)
     private int year;
 
     @NotNull
