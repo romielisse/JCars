@@ -29,11 +29,11 @@
               method="post">
             <input type="hidden" th:field="*{id}" />
             <div class="form-group">
-                <label for="category_name">Name of Car Category</label>
+                <label for="name">Name of Car Category</label>
                 <input type="text" th:field="*{name}" />
                 <span th:if="${#fields.hasErrors('name')}"
                       th:errors="*{name}"></span>
-                <small id="nameHelp" class="form-text text-muted">Please be sure to add a category that is not already listed.</small>
+                <small id="name" class="form-text text-muted">Please be sure to add a category that is not already listed.</small>
             </div>
             <div class="form-group">
                 <span th:text="${message}"></span><br />

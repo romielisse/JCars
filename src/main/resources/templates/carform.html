@@ -68,9 +68,11 @@
                     <div class="form-group">
                         Category
                         <select th:field="*{category}" class="form-control input-md">
-                            <option selected>Select Category</option>
-                            <option th:each="option : ${categories}"
-                                    th:value="${option.id}">[[${option.name}]]</option>
+                            <!--<option th:selected>Select Category</option>-->
+                            <option th:each="option : ${categories}" th:value="${option.id}" th:selected="${option}">
+                                [[${option.name}]]
+                            </option>
+                            <option value="0" selected="selected">Choose Category</option>
                         </select><br />
                         <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label>-->
                         <!--<select th:field="*{category}" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">-->
