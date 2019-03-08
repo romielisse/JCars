@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3>Please submit a form below.</h3>
+                <h3>Please submit a form for car below</h3>
                 <!-- When doing forms, be sure to have th:field, th:if, th:errors tags-->
                 <form action="#"
                       th:action="@{/process}"
@@ -37,33 +37,38 @@
                     <div class="form-group">
                         <label for="type">Type</label>
                         <input type="text" class="form-control" id="type" th:field="*{type}" />
-                        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span><br />
+                        <span th:if="${#fields.hasErrors('type')}"
+                              th:errors="*{type}"></span><br />
                     </div>
                     <div class="form-group">
                         <label for="make">Make</label>
                         <input type="text" class="form-control" id="make" th:field="*{make}" />
-                        <span th:if="${#fields.hasErrors('make')}" th:errors="*{make}"></span><br />
+                        <span th:if="${#fields.hasErrors('make')}"
+                              th:errors="*{make}"></span><br />
                     </div>
                     <div class="form-group">
                         <label for="model">Model</label>
                         <input type="text" class="form-control" id="model" th:field="*{model}" />
-                        <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></span><br />
+                        <span th:if="${#fields.hasErrors('model')}"
+                              th:errors="*{model}"></span><br />
                     </div>
                     <div class="form-group">
                         <label for="year">Year</label>
                         <input type="text" class="form-control" id="year" th:field="*{year}" />
-                        <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span><br />
+                        <span th:if="${#fields.hasErrors('year')}"
+                              th:errors="*{year}"></span><br />
                     </div>
                     <div class="form-group text-left">
                         <label for="mileage">Mileage</label>
                         <input type="text" class="form-control" id="mileage" th:field="*{mileage}" />
-                        <span th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"></span><br />
+                        <span th:if="${#fields.hasErrors('mileage')}"
+                              th:errors="*{mileage}"></span><br />
                     </div>
                     <!-- If not in stock, set numBooks to zero -->
                     <div class="form-group">
                         Category
                         <select th:field="*{category}" class="form-control input-md">
-                            <option selected>Choose</option>
+                            <option selected>Select Category</option>
                             <option th:each="option : ${categories}"
                                     th:value="${option.id}">[[${option.name}]]</option>
                         </select><br />

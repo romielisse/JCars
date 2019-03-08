@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+    <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 </head>
@@ -20,23 +21,26 @@
         </div>
     </header>
 
-    <h1>Category Form</h1>
-    <form action="#"
-          th:action="@{/processcategory}"
-          th:object="${category}"
-          method="post">
-
-        <input type="hidden" th:field="*{id}" />
-
-        Name :<input type="text" th:field="*{name}" />
-
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br />
-
-        <span th:text="${message}"></span><br />
-
-        <input type="submit" value="Submit" />
-
-    </form>
+    <section class="container">
+        <h3>Please add a name for the category you'd like to add.</h3>
+        <form action="#"
+              th:action="@{/processcategory}"
+              th:object="${category}"
+              method="post">
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <label for="category_name">Name of Car Category</label>
+                <input type="text" th:field="*{name}" />
+                <span th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}"></span>
+                <small id="nameHelp" class="form-text text-muted">Please be sure to add a category that is not already listed.</small>
+            </div>
+            <div class="form-group">
+                <span th:text="${message}"></span><br />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
 
     <!--JSS Script-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
