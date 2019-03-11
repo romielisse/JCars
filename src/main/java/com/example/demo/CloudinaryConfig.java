@@ -34,8 +34,10 @@ public class CloudinaryConfig {
         }
     }
 
+
     public String createUrl(String name, int width, int height, String action){
-        return cloudinary.url()
+        return cloudinary
+                .url()
                 .transformation(new Transformation()
                         .width(width).height(height)
                         .border("2px_solid_black").crop(action))

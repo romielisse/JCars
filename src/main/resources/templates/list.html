@@ -37,8 +37,9 @@
                 <td th:text="${car.year}"></td>
                 <td th:text="${car.mileage}"></td>
                 <!--add car photo-->
-                <td th:if="${car.carpic} != null">
-                    <img th:src="${car.carpic}" />
+                <td> <!--th:if="${car.carpic} != null"-->
+                    <!--<img th:src="${car.carpic}" alt="car pic" />-->
+                    <img th:src="${car.carpic==null}?'':${car.carpic}" />
                 </td>
                 <td th:text="${car.category.categoryName}"></td>    <!-- this omission took me an hour to find. car.category.CATEGORYNAME -->
                 <td>
