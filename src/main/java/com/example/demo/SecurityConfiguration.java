@@ -1,3 +1,4 @@
+// adds a log in page
 package com.example.demo;
 
 import org.springframework.context.annotation.Bean;
@@ -23,7 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin(); // as indicated here
     }
 
     @Override
