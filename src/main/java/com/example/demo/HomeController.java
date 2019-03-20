@@ -37,25 +37,29 @@ public class HomeController {
     @GetMapping("/add")
     public String carForm(Model model){
         model.addAttribute("car", new Car());
-        /* new addition for Category object */
         model.addAttribute("categories", categoryRepository.findAll());
         return "carform";
     }
 
     /* add method for car picture */
     @PostMapping("/add")
-    public String processActor(@ModelAttribute Car car, @RequestParam("file") MultipartFile file){
+    public String processMessage(@ModelAttribute Car car,
+                                 @RequestParam("file") MultipartFile file){
         if (file.isEmpty()){
-            return "redirect:/add";
+//            carRepository.save(car);
+            return "redirect:/";
         }
         try {
-            Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcestype", "auto"));
+            Map uploadResult = cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resourcestype", "auto"));
             car.setCarpic(uploadResult.get("url").toString());
-            carRepository.save(car);
-        } catch (IOException e){
+//            carRepository.save(car);
+        }
+        catch (IOException e){
             e.printStackTrace();
             return "redirect:/add";
         }
+        carRepository.save(car);
         return "redirect:/";
     }
 
@@ -63,6 +67,7 @@ public class HomeController {
     public String processForm(@Valid Car car, BindingResult result,
                               Model model){
         if (result.hasErrors()){
+            model.addAttribute("categories", categoryRepository.findAll());
             return "carform";
         }
         carRepository.save(car);
@@ -75,6 +80,7 @@ public class HomeController {
     @RequestMapping("/category")
     public String listCategories(Model model){
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("cars", carRepository.findAll());
         return "listcategory";
     }
 
@@ -82,13 +88,13 @@ public class HomeController {
     @GetMapping("/addcategory")
     public String categoryForm(Model model){
         model.addAttribute("category", new Category());
+            model.addAttribute("categories", categoryRepository.findAll());
         return "categoryform";
     }
 
     /* new addition for Category object */
     @PostMapping("/processcategory")
-    public String processCategory(@Valid Category category, BindingResult result,
-                                  Model model){
+    public String processCategory(Model model, @Valid Category category, BindingResult result){
         if (result.hasErrors()){
             return "categoryform";
         }
@@ -98,7 +104,7 @@ public class HomeController {
             return "categoryform";
         }
         categoryRepository.save(category);
-        return "redirect:/";
+        return "redirect:/category";
     }
 
     /* lastly, the detail or update or delete paths as usual */
@@ -111,34 +117,37 @@ public class HomeController {
     @RequestMapping("/updatecar/{id}")
     public String updateCar(@PathVariable("id") long id, Model model){
         model.addAttribute("car", carRepository.findById(id).get());
+        model.addAttribute("categories", categoryRepository.findAll());
+
         return "carform";
     }
 
     @RequestMapping("/deletecar/{id}")
-    public String deleteCar(@PathVariable("id") long id){               // delete isn't working
+    public String deleteCar(@PathVariable("id") long id){     // delete isn't working - should work now that cascadeType is REMOVE
         carRepository.deleteById(id);
         return "redirect:/";
     }
-
 
 
     /* and a version for category class */
     @RequestMapping("/detailcategory/{id}")
     public String showCategory(@PathVariable("id") long id, Model model){
         model.addAttribute("category", categoryRepository.findById(id).get());
+        model.addAttribute("cars", carRepository.findAll());
         return "showcategory";
     }
 
     @RequestMapping("/updatecategory/{id}")
     public String updateCategory(@PathVariable("id") long id, Model model){
         model.addAttribute("category", categoryRepository.findById(id).get());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "categoryform";
     }
 
     @RequestMapping("/deletecategory/{id}")
     public String deleteCategory(@PathVariable("id") long id){
         categoryRepository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/category";
     }
 
      /*

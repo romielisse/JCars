@@ -16,7 +16,11 @@ public class Category {
     @Size(min = 3)
     private String categoryName;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category",
+            cascade = CascadeType.REMOVE,  // .ALL won't allow you to do the delete but .REMOVE will
+            // cascade = data persistence. read it in context of hibernate (implementation of Jpa - turns JPQL queries to SQL queries)
+            // https://www.baeldung.com/delete-with-hibernate
+            fetch = FetchType.EAGER)
     public Set<Car> cars;   // Set must be public
 
     public Category(){

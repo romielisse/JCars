@@ -18,12 +18,15 @@
                 <h3>Please submit a form for car below</h3>
                 <!-- When doing forms, be sure to have th:field, th:if, th:errors tags-->
                 <form action="#"
-                      th:action="@{/process}"
+                      th:action="@{/add}"
                       th:object="${car}"
                       method="post"
                       enctype="multipart/form-data">
+                    <!-- When I had @{/process} above, the pic wasn't being saved and didn't display -->
+
                     <!-- hidden field -->
                         <input type="hidden" th:field="*{id}" />
+
                     <div class="form-group">
                         <label for="type">Type</label>
                         <input type="text" class="form-control" id="type" th:field="*{type}" />
@@ -56,20 +59,24 @@
                     </div>
                     <div>
                         Photo
-                        <input type="file" name="file"><br />
+                        <input type="file" name="file" /><br />
                         <!--<span th:if="${#fields.hasErrors('carpic')}"-->
                               <!--th:errors="*{carpic}"></span><br />-->
                     </div>
                     <div class="form-group">
                         Category
-                        <select name="category" id="category" class="form-control input-md">
-                            <option th:selected>Select Category</option>
-                            <option th:each="option : ${categories}"
-                                    th:value="${option.id}"
-                                    th:text="${option.categoryName}"></option>
+                        <select name="category" th:field="*{category}" class="form-control input-md">
+                            <!-- above name field holds the value of the selected category ie) compact -->
+                            <option value="">Select Category</option> <!-- th:selected not needed -->
+
+                            <option th:each="category : ${categories}"
+                                    th:value="${category.id}"
+                                    th:text="${category.categoryName}"></option>
                             <!-- th:value attributes in the nested <option> tags will be very important because
                             they will provide the means of knowing which is the currently selected option-->
                         </select><br />
+                        <span th:if="${#fields.hasErrors('category')}"
+                              th:errors="*{category}"></span><br />
                     </div>
                     <!-- submit button -->
                     <button type="submit" class="btn btn-primary my-1">Save</button>
