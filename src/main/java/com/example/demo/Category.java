@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.Car;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

@@ -41,7 +41,7 @@
                     <!--<img th:src="${car.carpic}" alt="car pic" />-->
                     <img th:src="${car.carpic==null}?'':${car.carpic}" />
                 </td>
-                <td th:text="${car.category.categoryName}"></td>    <!-- this omission took me an hour to find. car.category.CATEGORYNAME -->
+                <td th:text="${car.category.categoryName}"></td>    <!-- remember that car has a category which has a categoryname var: so, read car.category.CATEGORYNAME -->
                 <td>
                     <a th:href="@{/updatecar/{id}(id=${car.id})}"> Update </a> -
                     <a th:href="@{/detailcar/{id}(id=${car.id})}"> More Info </a> -
