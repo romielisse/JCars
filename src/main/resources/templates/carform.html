@@ -5,95 +5,102 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
 </head>
 <body>
-    <div th:insert="~{base :: copy}"></div>
+<div th:insert="~{base :: copy}"></div>
 
-    <!-- form format -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>Please submit a form for car below</h3>
-                <!-- When doing forms, be sure to have th:field, th:if, th:errors tags-->
-                <form action="#"
-                      th:action="@{/add}"
-                      th:object="${car}"
-                      method="post"
-                      enctype="multipart/form-data">
-                    <!-- When I had @{/process} above, the pic wasn't being saved and didn't display -->
+<!-- form format -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Please submit a form for car below</h3>
+            <!-- When doing forms, be sure to have th:field, th:if, th:errors tags-->
+            <form action="#"
+                  th:action="@{/add}"
+                  th:object="${car}"
+                  method="post"
+                  enctype="multipart/form-data">
+                <!-- When I had @{/process} above, the pic wasn't being saved and didn't display -->
 
-                    <!-- hidden field -->
-                        <input type="hidden" th:field="*{id}" />
+                <!-- hidden field -->
+                <input type="hidden" th:field="*{id}"/>
 
-                    <div class="form-group">
-                        <label for="type">Type</label>
-                        <input type="text" class="form-control" id="type" th:field="*{type}" />
-                        <span th:if="${#fields.hasErrors('type')}"
-                              th:errors="*{type}"></span><br />
-                    </div>
-                    <div class="form-group">
-                        <label for="make">Make</label>
-                        <input type="text" class="form-control" id="make" th:field="*{make}" />
-                        <span th:if="${#fields.hasErrors('make')}"
-                              th:errors="*{make}"></span><br />
-                    </div>
-                    <div class="form-group">
-                        <label for="model">Model</label>
-                        <input type="text" class="form-control" id="model" th:field="*{model}" />
-                        <span th:if="${#fields.hasErrors('model')}"
-                              th:errors="*{model}"></span><br />
-                    </div>
-                    <div class="form-group">
-                        <label for="year">Year</label>
-                        <input type="text" class="form-control" id="year" th:field="*{year}" />
-                        <span th:if="${#fields.hasErrors('year')}"
-                              th:errors="*{year}"></span><br />
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="mileage">Mileage</label>
-                        <input type="text" class="form-control" id="mileage" th:field="*{mileage}" />
-                        <span th:if="${#fields.hasErrors('mileage')}"
-                              th:errors="*{mileage}"></span><br />
-                    </div>
-                    <div>
-                        Photo
-                        <input type="file" name="file" /><br />
-                        <!--<span th:if="${#fields.hasErrors('carpic')}"-->
-                              <!--th:errors="*{carpic}"></span><br />-->
-                    </div>
-                    <div class="form-group">
-                        Category
-                        <select name="category" th:field="*{category}" class="form-control input-md">
-                            <!-- above name field holds the value of the selected category ie) compact -->
-                            <option value="">Select Category</option> <!-- th:selected not needed -->
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" id="type"
+                           th:field="*{type}"/>
+                    <span th:if="${#fields.hasErrors('type')}"
+                          th:errors="*{type}"></span><br/>
+                </div>
+                <div class="form-group">
+                    <label for="make">Make</label>
+                    <input type="text" class="form-control" id="make"
+                           th:field="*{make}"/>
+                    <span th:if="${#fields.hasErrors('make')}"
+                          th:errors="*{make}"></span><br/>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model</label>
+                    <input type="text" class="form-control" id="model"
+                           th:field="*{model}"/>
+                    <span th:if="${#fields.hasErrors('model')}"
+                          th:errors="*{model}"></span><br/>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <input type="text" class="form-control" id="year"
+                           th:field="*{year}"/>
+                    <span th:if="${#fields.hasErrors('year')}"
+                          th:errors="*{year}"></span><br/>
+                </div>
+                <div class="form-group text-left">
+                    <label for="mileage">Mileage</label>
+                    <input type="text" class="form-control" id="mileage"
+                           th:field="*{mileage}"/>
+                    <span th:if="${#fields.hasErrors('mileage')}"
+                          th:errors="*{mileage}"></span><br/>
+                </div>
+                <div>
+                    Photo
+                    <input type="file" name="file"/><br/>
+                    <!--<span th:if="${#fields.hasErrors('carpic')}"-->
+                    <!--th:errors="*{carpic}"></span><br />-->
+                </div>
+                <div class="form-group">
+                    Category
+                    <select name="category" th:field="*{category}"
+                            class="form-control input-md">
+                        <!-- above name field holds the value of the selected category ie) compact -->
+                        <option value="">Select Category</option>
+                        <!-- th:selected not needed -->
 
-                            <option th:each="category : ${categories}"
-                                    th:value="${category.id}"
-                                    th:text="${category.categoryName}"></option>
-                            <!-- th:value attributes in the nested <option> tags will be very important because
-                            they will provide the means of knowing which is the currently selected option-->
-                        </select><br />
-                        <span th:if="${#fields.hasErrors('category')}"
-                              th:errors="*{category}"></span><br />
-                    </div>
-                    <!-- submit button -->
-                    <button type="submit" class="btn btn-primary my-1">Save</button>
-                </form>
-            </div>
+                        <option th:each="category : ${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.categoryName}"></option>
+                        <!-- th:value attributes in the nested <option> tags will be very important because
+                        they will provide the means of knowing which is the currently selected option-->
+                    </select><br/>
+                </div>
+                <!-- submit button -->
+                <button type="submit" class="btn btn-primary my-1">Save</button>
+            </form>
         </div>
     </div>
+</div>
 
-    <!--JSS Script-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+<!--JSS Script-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

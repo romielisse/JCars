@@ -40,21 +40,24 @@ public class HomeController {
     }
     /* add method for car picture */
     @PostMapping("/add")
-    public String processForm(@ModelAttribute Car car,
-                                 @RequestParam("file") MultipartFile file){
-        if (file.isEmpty()){
-//            carRepository.save(car);
-            return "redirect:/";
+    public String processForm(@Valid @ModelAttribute Car car,
+                              BindingResult result,
+                                 @RequestParam("file") MultipartFile file,
+                              Model model){
+        if (result.hasErrors()){
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "carform";
         }
-        try {
-            Map uploadResult = cloudc.upload(file.getBytes(),
-                    ObjectUtils.asMap("resourcestype", "auto"));
-            car.setCarpic(uploadResult.get("url").toString());
+
+        if(!file.isEmpty()) {
+            try {
+                Map uploadResult = cloudc.upload(file.getBytes(),
+                        ObjectUtils.asMap("resourcestype", "auto"));
+                car.setCarpic(uploadResult.get("url").toString());
 //            carRepository.save(car);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-            return "redirect:/add";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         carRepository.save(car);
         return "redirect:/";

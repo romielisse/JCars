@@ -19,7 +19,7 @@
 
         <p>Here are the cars in this selected category.</p>
 
-        <div th:text="${category.categoryName} + ' Car'">
+        <div th:text="${category.categoryName} + ' Car'"></div>
 
             <table>
                 <tr>
@@ -29,7 +29,7 @@
                     <th>Year</th>
                     <th>Mileage</th>
                 </tr>
-                <tr>
+                <tr th:each="car : ${cars}">
                     <td th:text="${car.type}"></td>
                     <td th:text="${car.make}">
                     <td th:text="${car.model}"></td>
@@ -46,7 +46,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+
         <a th:href="@{/deletecategory/{id}(id=${category.id})}"> Delete this category</a>
 
     </section>
